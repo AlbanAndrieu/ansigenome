@@ -384,7 +384,7 @@ def normalize_role(role, config):
         else:
             role_name = role
 
-    return role_name
+    return role_name.replace(".", "_").replace("-", "_")
 
 
 def create_meta_main(create_path, config, role, categories):

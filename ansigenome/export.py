@@ -264,3 +264,4 @@ digraph role_dependencies {
             utils.string_to_file(self.out_file, report_as_json_string)
         else:
             print report_as_json_string
+

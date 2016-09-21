@@ -111,7 +111,13 @@ Authors and license
 {% for credit in authors %}
 - {% if credit.url is defined and credit.url %}`{% endif %}{{ credit.name }}{% if credit.url is defined and credit.url %} <{{ credit.url }}>`_{% endif %}{% if credit.email is defined and credit.email %} | `e-mail <mailto:{{ credit.email }}>`_{% endif %}{% if credit.twitter is defined and credit.twitter %} | `Twitter <https://twitter.com/{{ credit.twitter }}>`_{% endif %}{% if credit.github is defined and credit.github %} | `GitHub <https://github.com/{{ credit.github }}>`_{% endif %}
 {% endfor %}
-License: `{{ license.type | trim }} <{{ license.url | trim }}>`_
+
+- License: `{{ license.type | trim }} <{{ license.url | trim }}>`_
+
+Feedback, bug-reports, requests, ...
+~~~~~~~~~~~~~~~~~~~
+
+Are `welcome <https://github.com/{{ scm.user + '/' + role.slug }}/issues>`_!
 {% endblock %}
 
 {% block footer %}

@@ -209,11 +209,12 @@ class Scan(object):
             # create a simple list of each role that is a dependency
             dep_list = []
 
-            for dependency in meta_dict["dependencies"]:
-                if type(dependency) is dict:
-                    dep_list.append(dependency["role"])
-                else:
-                    dep_list.append(dependency)
+            if meta_dict["dependencies"] is not None:
+                for dependency in meta_dict["dependencies"]:
+                    if type(dependency) is dict:
+                        dep_list.append(dependency["role"])
+                    else:
+                        dep_list.append(dependency)
 
             # unique set of dependencies
             meta_dict["dependencies"] = list(set(dep_list))
@@ -525,12 +526,25 @@ ansigenome_info:
 
         role_name = utils.normalize_role(role, self.config)
 
+        if "galaxy_user" in self.meta_dict["ansigenome_info"]:
+            if "galaxy_name" in self.meta_dict["ansigenome_info"]:
+                galaxy_name = "{0}.{1}".format(self.meta_dict["ansigenome_info"]["galaxy_user"], self.meta_dict["ansigenome_info"]["galaxy_name"])
+            else:
+                galaxy_name = "{0}.{1}".format(self.meta_dict["ansigenome_info"]["galaxy_user"],
+                                               role_name)
+        else:
+            galaxy_name = "{0}.{1}".format(self.config["scm_user"],
+                                           role_name)
+
+        if "galaxy_name" in self.meta_dict["ansigenome_info"]:
+            slug_name = "{0}{1}".format(self.config["scm_repo_prefix"], self.meta_dict["ansigenome_info"]["galaxy_name"])
+        else:
+            slug_name = "{0}{1}".format(self.config["scm_repo_prefix"], role_name)
+
         normalized_role = {
             "name": role_name,
-            "galaxy_name": "{0}.{1}".format(self.config["scm_user"],
-                                            role_name),
-            "slug": "{0}{1}".format(self.config["scm_repo_prefix"],
-                                    role_name),
+            "galaxy_name": galaxy_name,
+            "slug": slug_name
         }
 
         if "authors" in self.meta_dict["ansigenome_info"]:

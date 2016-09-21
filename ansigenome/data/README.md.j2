@@ -11,7 +11,9 @@
 
 {% block badges %}
 {% if ansigenome_info.travis|d() %}
-[![Travis CI](http://img.shields.io/travis/{{ scm.user + '/' + role.slug }}.svg?style=flat)](http://travis-ci.org/{{ scm.user + '/' + role.slug }})
+[![Donate](https://img.shields.io/gratipay/{{ scm.user }}.svg?style=flat)](https://www.gratipay.com/{{ scm.user }})
+[![Travis CI](http://img.shields.io/travis/{{ scm.user + '/' + role.slug }}.svg?style=flat)](http://travis-ci.org/{{ scm.user + '/' + role.slug }}) 
+[![Branch](http://img.shields.io/github/tag/{{ scm.user + '/' + role.slug }}.svg?style=flat-square)](https://github.com/{{ scm.user + '/' + role.slug }}/tree/master)
 {% endif %}
 {% if ansigenome_info.galaxy_id|d() %}
 [![Ansible Galaxy](http://img.shields.io/badge/galaxy-{{ role.galaxy_name | replace('-', '--')}}-660198.svg?style=flat)](https://galaxy.ansible.com/detail#/role/{{ ansigenome_info.galaxy_id }})
@@ -107,6 +109,21 @@ List of internal variables used by the role:
 
 {{ ansigenome_info.custom | trim }}{% endif %}
 
+### Testing
+```shell
+$ ansible-galaxy install {{ role.galaxy_name }}
+$ vagrant up
+```
+
+### Contributing
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests and examples for any new or changed functionality.
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
+
 {% block authors %}
 ### Authors and license
 
@@ -117,7 +134,11 @@ List of internal variables used by the role:
 
 {% endfor %}
 
-License: [{{ license.type | trim }}]({{ license.url | trim }})
+- License: [{{ license.type | trim }}]({{ license.url | trim }})
+
+### Feedback, bug-reports, requests, ...
+
+Are [welcome](https://github.com/{{ scm.user + '/' + role.slug }}/issues)!
 {% endblock %}
 
 {% block footer %}
