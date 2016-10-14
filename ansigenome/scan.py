@@ -107,7 +107,7 @@ class Scan(object):
         for key, value in sorted(self.roles.iteritems()):
             self.paths["role"] = os.path.join(self.roles_path, key)
             self.paths["meta"] = os.path.join(self.paths["role"], "meta",
-                                              "main.yml")
+                                              "ansigenome.yml")
             self.paths["readme"] = os.path.join(self.paths["role"],
                                                 "README.{0}"
                                                 .format(self.readme_format))
